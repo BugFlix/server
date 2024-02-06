@@ -4,6 +4,8 @@ import com.bugflix.weblog.post.dto.PostPreviewResponse;
 import com.bugflix.weblog.post.dto.PostRequest;
 import com.bugflix.weblog.post.dto.PostResponse;
 import com.bugflix.weblog.post.service.PostServiceImpl;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 @Slf4j
+@Tag(name = "Post API", description = "Post 관련 API")
 public class PostController {
     private final PostServiceImpl postServiceImpl;
 
@@ -38,6 +41,7 @@ public class PostController {
      * - 2. weblog page 에서 저장 요청
      */
     @PostMapping("/v1/posts")
+    @Operation(summary = "Post 저장",description = "사용자가 작성한 Post를 저장합니다.")
     public ResponseEntity<Void> savePost(@RequestBody PostRequest postRequest,
                                          @AuthenticationPrincipal UserDetails userDetails) {
         postServiceImpl.savePost(postRequest, userDetails);
@@ -62,6 +66,7 @@ public class PostController {
      * - 2. weblog page 에서 수정 요청
      */
     @PutMapping("/v1/posts")
+    @Operation(summary = "Post 수정", description = "사용자가 자신이 작성한 Post를 수정하여 저장합니다.")
     public ResponseEntity<Void> updatePost(@RequestBody PostRequest postRequest, @RequestParam(name = "postId") Long postId) throws Exception {
         postServiceImpl.updatePost(postRequest, postId);
         return ResponseEntity.ok().build();
@@ -85,6 +90,7 @@ public class PostController {
      * - 2. post_id 로 post 검색
      */
     @GetMapping("/v1/posts/{postId}")
+    @Operation(summary = "Post 조회", description = "사용자가 지정한 하나의 Post를 반환합니다.")
     public ResponseEntity<PostResponse> getPost(@PathVariable Long postId,
                                                 @AuthenticationPrincipal UserDetails userDetails) throws Exception {
         if (userDetails == null) return ResponseEntity.ok(postServiceImpl.getPost(postId));
@@ -108,6 +114,7 @@ public class PostController {
      * - 1. extension 에서 post 보기 요청
      */
     @GetMapping("/v1/posts")
+    @Operation(summary = "Post 조회", description = "Page내의 전체 Post를 반환합니다.")
     public ResponseEntity<List<PostResponse>> getAllPost(@RequestParam(name = "url") String url) {
 
         return ResponseEntity.ok(postServiceImpl.getPosts(url));
@@ -129,6 +136,7 @@ public class PostController {
      * - 1. extension 에서 post 목록 요청
      */
     @GetMapping("/v1/posts/preview")
+    @Operation(summary = "Post 미리보기 조회", description = "Page내의 Post 미리보기 전체를 반환합니다.")
     public ResponseEntity<List<PostPreviewResponse>> getPostPreview(@RequestParam(name = "url") String url,
                                                                     @AuthenticationPrincipal UserDetails userDetails) {
         if (userDetails == null) return ResponseEntity.ok(postServiceImpl.getPostPreview(url));
@@ -146,6 +154,7 @@ public class PostController {
      * - 특정 web page 에 있는 본인이 작성한 모든 post 의 preview 반환
      */
     @GetMapping("/v1/posts/mine")
+    @Operation(summary = "Post 미리보기 반환", description = "Page내의 사용자의 Post 미리보기를 반환합니다.")
     public ResponseEntity<List<PostPreviewResponse>> getMyPostPreview(@RequestParam(name = "url") String url,
                                                                       @AuthenticationPrincipal UserDetails userDetails) {
 
@@ -163,6 +172,7 @@ public class PostController {
      * - postId 로 Post 삭제
      */
     @DeleteMapping("/v1/posts/{postId}")
+    @Operation(summary = "Post 삭제",description = "사용자가 자신의 Post를 삭제합니다.")
     public ResponseEntity<Void> deletePost(@PathVariable Long postId) {
 
         postServiceImpl.deletePost(postId);
