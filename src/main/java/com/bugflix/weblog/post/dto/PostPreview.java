@@ -30,7 +30,8 @@ public class PostPreview {
             boolean isLiked,
             LocalDateTime createdDate,
             LocalDateTime modifiedDate,
-            Long likeCount) {
+            Long likeCount)
+    {
         this.postId = post.getPostId();
         this.title = post.getTitle();
         this.imageUrl = post.getImageUrl();
