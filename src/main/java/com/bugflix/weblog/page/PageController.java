@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class PageController {
     private final PageServiceImpl pageService;
-
     @GetMapping
-    public Page getPage(@RequestParam(name = "url") String url) throws Exception {
+    public Page getPage(@RequestParam(name = "url") String url) throws Exception{
 
         return pageService.getPage(url);
     }
