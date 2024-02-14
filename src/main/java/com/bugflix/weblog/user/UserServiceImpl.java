@@ -1,9 +1,6 @@
-package com.bugflix.weblog.user.service;
+package com.bugflix.weblog.user;
 
-import com.bugflix.weblog.user.repository.UserRepository;
-import com.bugflix.weblog.user.domain.Authority;
-import com.bugflix.weblog.user.domain.User;
-import com.bugflix.weblog.user.dto.SignInRequest;
+import com.bugflix.weblog.security.dto.SignInRequest;
 import com.bugflix.weblog.user.dto.SignUpRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,7 +18,7 @@ public class UserServiceImpl {
     public void register(SignUpRequest signUpRequest) {
         Authority at = new Authority("ROLE_USER");
         User user = User.builder()
-                .email(signUpRequest.getEmail())
+                .loginId(signUpRequest.getLoginId())
                 .password(passwordEncoder.encode(signUpRequest.getPassword()))
                 .nickname(signUpRequest.getNickname())
                 .build();
@@ -33,7 +30,7 @@ public class UserServiceImpl {
     }
 
     public void unregister(SignInRequest signInRequest) throws Exception {
-        User user = userRepository.findByEmail(signInRequest.getEmail()).orElseThrow(() ->
+        User user = userRepository.findByLoginId(signInRequest.getLoginId()).orElseThrow(() ->
                 new Exception("계정을 찾을 수 없습니다."));
 
         // 비밀번호 검증 로직 필요

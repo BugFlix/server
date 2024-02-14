@@ -1,6 +1,5 @@
-package com.bugflix.weblog.user.repository;
+package com.bugflix.weblog.user;
 
-import com.bugflix.weblog.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,5 +7,5 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByEmail(String loginId);
+    Optional<User> findByLoginId(String loginId);
 }
