@@ -1,10 +1,9 @@
-package com.bugflix.weblog.page.repository;
+package com.bugflix.weblog.page;
 
-import com.bugflix.weblog.page.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
 public interface PageRepository extends JpaRepository<Page, Long> {
-    Optional<Page> findPageByUrl(String url);
+    public Optional<Page> findPageByUrl(String url);
 }

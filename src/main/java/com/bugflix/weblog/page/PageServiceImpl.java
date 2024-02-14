@@ -1,7 +1,5 @@
-package com.bugflix.weblog.page.service;
+package com.bugflix.weblog.page;
 
-import com.bugflix.weblog.page.domain.Page;
-import com.bugflix.weblog.page.repository.PageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

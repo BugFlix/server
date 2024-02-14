@@ -1,9 +1,11 @@
-package com.bugflix.weblog.like.domain;
+package com.bugflix.weblog.like;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Entity(name = "like_tb")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

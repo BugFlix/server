@@ -1,14 +1,14 @@
-package com.bugflix.weblog.post.domain;
+package com.bugflix.weblog.post;
 
 import com.bugflix.weblog.common.BaseTimeEntity;
 import com.bugflix.weblog.post.dto.PostRequest;
-import com.bugflix.weblog.tag.domain.Tag;
-import com.bugflix.weblog.user.domain.User;
+import com.bugflix.weblog.tag.Tag;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import com.bugflix.weblog.page.domain.Page;
+import com.bugflix.weblog.page.Page;
+import com.bugflix.weblog.user.User;
 
 import java.util.ArrayList;
 import java.util.List;

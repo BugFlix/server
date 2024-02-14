@@ -1,18 +1,16 @@
-package com.bugflix.weblog.post.service;
+package com.bugflix.weblog.post;
 
-import com.bugflix.weblog.like.service.LikeServiceImpl;
-import com.bugflix.weblog.page.domain.Page;
-import com.bugflix.weblog.page.repository.PageRepository;
-import com.bugflix.weblog.post.domain.Post;
-import com.bugflix.weblog.post.dto.PostPreviewResponse;
+import com.bugflix.weblog.like.LikeServiceImpl;
+import com.bugflix.weblog.page.Page;
+import com.bugflix.weblog.page.PageRepository;
+import com.bugflix.weblog.post.dto.PostPreview;
 import com.bugflix.weblog.post.dto.PostRequest;
 import com.bugflix.weblog.post.dto.PostResponse;
-import com.bugflix.weblog.post.repository.PostRepository;
-import com.bugflix.weblog.tag.domain.Tag;
-import com.bugflix.weblog.tag.repository.TagRepository;
-import com.bugflix.weblog.tag.service.TagServiceImpl;
-import com.bugflix.weblog.user.domain.User;
-import com.bugflix.weblog.user.service.UserServiceImpl;
+import com.bugflix.weblog.tag.Tag;
+import com.bugflix.weblog.tag.TagRepository;
+import com.bugflix.weblog.tag.TagServiceImpl;
+import com.bugflix.weblog.user.User;
+import com.bugflix.weblog.user.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -133,10 +131,10 @@ public class PostServiceImpl {
      * - postId 로 Post Entity 탐색
      * - Post 존재하지 않으면 예외처리, 존재하면 출력
      */
-    public List<PostResponse> getPosts(String url) {
+    public ArrayList<PostResponse> getPosts(String url) {
 
         List<Post> resultList = postRepository.findByPageUrl(url);
-        List<PostResponse> resultArrayList = new ArrayList<>();
+        ArrayList<PostResponse> resultArrayList = new ArrayList<>();
 
         resultList.forEach(post -> resultArrayList.add(new PostResponse(post)));
         // Todo : Tag, LikeCount, Profile 등 추가 필요
@@ -148,20 +146,20 @@ public class PostServiceImpl {
      * Parameter :
      * - String url
      * Return :
-     * - ArrayList<PostPreviewResponse>
+     * - ArrayList<PostPreview>
      * <p>
      * Explanation :
      * - 페이지 내의 모든 post 미리 보기 목록 반환
      */
-    public List<PostPreviewResponse> getPostPreview(String url) {
-        List<PostPreviewResponse> postPreviews = new ArrayList<>();
+    public ArrayList<PostPreview> getPostPreview(String url) {
+        ArrayList<PostPreview> postPreviews = new ArrayList<>();
 
         List<Post> postList = postRepository.findByPageUrl(url);
 
         for (Post post : postList) {
             Long postId = post.getPostId();
 
-            PostPreviewResponse postPreview = new PostPreviewResponse(
+            PostPreview postPreview = new PostPreview(
                     post,
                     tagRepository.findTagsByPostPostId(postId),
                     userService.findNicknameByPostId(postId),
@@ -182,19 +180,19 @@ public class PostServiceImpl {
      * Parameter :
      * - String url
      * Return :
-     * - ArrayList<PostPreviewResponse>
+     * - ArrayList<PostPreview>
      * <p>
      * Explanation :
      * - 페이지 내에서 내가 작성한 post 미리 보기 목록 반환
      */
-    public List<PostPreviewResponse> getMyPostPreview(String url) {
+    public ArrayList<PostPreview> getMyPostPreview(String url) {
         List<Post> posts = postRepository.findByPageUrlAndUserUserId(url, (long) 1);
-        List<PostPreviewResponse> postPreviews = new ArrayList<>();
+        ArrayList<PostPreview> postPreviews = new ArrayList<>();
 
         for (Post post : posts) {
             Long postId = post.getPostId();
 
-            PostPreviewResponse postPreview = new PostPreviewResponse(
+            PostPreview postPreview = new PostPreview(
                     post,
                     tagRepository.findTagsByPostPostId(postId),
                     userService.findNicknameByPostId(postId),
