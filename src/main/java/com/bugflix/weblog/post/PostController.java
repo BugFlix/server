@@ -1,6 +1,5 @@
 package com.bugflix.weblog.post;
 
-import com.bugflix.weblog.post.dto.PostPreview;
 import com.bugflix.weblog.post.dto.PostResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -110,29 +109,9 @@ public class PostController {
      *   - 1. extension 에서 post 보기 요청
      * */
     @GetMapping("/post")
-    public ResponseEntity<ArrayList<PostResponse>> getPost(@RequestParam(name="url") String url) {
+    public ResponseEntity<ArrayList<PostResponse>> getPost(@RequestParam(name="url") String url) throws Exception{
 
         return ResponseEntity.ok(postServiceImpl.getPosts(url));
     }
 
-    /**
-     *  Name : getPostPreview
-     *  Parameter :
-     *   - String url: web page 주소
-     *  Return :
-     *   - ResponseEntity<ArrayList<PostPreview>> :
-     *     - Success : 200 ok && ArrayList<Post>
-     *     - Failed : error
-     *
-     *  Explanation :
-     *   - 특정 web page 에 있는 모든 post 의 preview 반환
-     *
-     *  Scenario :
-     *   - 1. extension 에서 post 목록 요청
-     * */
-    @GetMapping("/post/preview")
-    public ResponseEntity<ArrayList<PostPreview>> getPostPreview(@RequestParam(name = "url")String url){
-
-        return ResponseEntity.ok(postServiceImpl.getPostPreview(url));
-    }
 }
