@@ -6,12 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/page")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 @Slf4j
 public class PageController {
     private final PageServiceImpl pageService;
-    @GetMapping
+    @GetMapping("/page")
     public Page getPage(@RequestParam(name = "url") String url) throws Exception{
 
         return pageService.getPage(url);
