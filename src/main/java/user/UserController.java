@@ -1,4 +1,4 @@
-package com.bugflix.weblog.user;
+package user;
 
 public class UserController {
 }

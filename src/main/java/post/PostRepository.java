@@ -1,4 +1,4 @@
-package com.bugflix.weblog.post;
+package post;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

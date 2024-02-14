@@ -1,8 +1,8 @@
-package com.bugflix.weblog.user;
+package user;
 
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
-import com.bugflix.weblog.post.Post;
+import post.Post;
 
 import java.util.List;
 
