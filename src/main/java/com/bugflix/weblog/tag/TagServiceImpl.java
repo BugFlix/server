@@ -1,7 +1,6 @@
-package com.bugflix.weblog.tag.service;
+package com.bugflix.weblog.tag;
 
-import com.bugflix.weblog.tag.domain.Tag;
-import com.bugflix.weblog.tag.repository.TagRepository;
+import com.bugflix.weblog.tag.dto.TagRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
