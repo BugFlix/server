@@ -1,11 +1,8 @@
 package com.bugflix.weblog.tag.dto;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
-@Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@Data
 public class TagRequest {
     private String tag;
 }
