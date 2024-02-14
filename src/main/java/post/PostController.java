@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import post.dto.PostRequest;
 import post.dto.PostResponse;
@@ -15,7 +16,8 @@ import java.util.ArrayList;
 @RequestMapping("/api")
 @Slf4j
 public class PostController {
-    private final PostServiceImpl postServiceImpl;
+    private final PostService postService;
+    private final static String tokenHeader = "token";
 
     /**
      *  Name : savePost
@@ -34,10 +36,9 @@ public class PostController {
      *    - 1. extension 에서 저장 요청
      *    - 2. weblog page 에서 저장 요청
      * */
-
     @PostMapping("/post")
     public ResponseEntity<Void> savePost(@RequestParam PostRequest postRequest ){
-        return (postServiceImpl.savePost(postRequest)) ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        return (postService.savePost(postRequest)) ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
     // Todo: 시나리오에 맞는 다양한 매개변수 사용
@@ -60,15 +61,13 @@ public class PostController {
      *   - 1. post 목록에서 post Click
      *   - 2. post_id 로 post 검색
      * */
-
     @GetMapping("/post")
     public ResponseEntity<PostResponse> getPost(@RequestParam Long postId){
 
-        return new ResponseEntity<>(postServiceImpl.getPost(postId), HttpStatus.OK);
+        return new ResponseEntity<>(postService.getPost(postId), HttpStatus.OK);
     }
 
     // Todo : RequestHeader 내용 수정 : @RequestHeader({Header Field Name})
-
     /**
      *  Name : getPosts
      *  Parameter :
@@ -85,11 +84,10 @@ public class PostController {
      *  Scenario :
      *   - 1. extension 에서 post 보기 요청
      * */
-
     @GetMapping("/post")
-    public ResponseEntity<ArrayList<PostResponse>> getPost(@RequestParam(name = "url") String url){
+    public ResponseEntity<ArrayList<PostResponse>> getPost(@RequestHeader String url){
 
-        return ResponseEntity.ok(postServiceImpl.getPost(url));
+        return ResponseEntity.ok(postService.getPost(url));
     }
 
 
