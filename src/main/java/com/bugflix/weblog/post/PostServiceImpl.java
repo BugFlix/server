@@ -1,6 +1,8 @@
 package com.bugflix.weblog.post;
 
-import com.bugflix.weblog.like.LikeServiceImpl;
+import com.bugflix.weblog.like.Like;
+import com.bugflix.weblog.like.LikeRepository;
+import com.bugflix.weblog.like.LikeService;
 import com.bugflix.weblog.page.Page;
 import com.bugflix.weblog.page.PageRepository;
 import com.bugflix.weblog.post.dto.PostPreview;
@@ -19,13 +21,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.bugflix.weblog.user.QUser.user;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class PostServiceImpl {
     private final PostRepository postRepository;
     private final PageRepository pageRepository;
-    private final LikeServiceImpl likeServiceImpl;
+    private final LikeService likeService;
     private final TagServiceImpl tagService;
     private final UserServiceImpl userService;
     private final TagRepository tagRepository;
@@ -113,8 +117,8 @@ public class PostServiceImpl {
         // Todo 1. post Update Logic 구성
         postResponse.setNickname(userService.findNicknameByPostId(postId));
         postResponse.setTags(tagService.findTagsByPostId(postId));
-        postResponse.setLike(likeServiceImpl.isLiked(postId,(long)1));
-        postResponse.setLikeCount(likeServiceImpl.countLikes(postId));
+        postResponse.setLike(likeService.isLiked(postId,(long)1));
+        postResponse.setLikeCount(likeService.countLikes(postId));
 
         return postResponse;
     }
@@ -165,10 +169,10 @@ public class PostServiceImpl {
                     post,
                     tagRepository.findTagsByPostPostId(postId),
                     userService.findNicknameByPostId(postId),
-                    likeServiceImpl.isLiked(postId,(long)1),    // Todo User Id로 변경
+                    likeService.isLiked(postId,(long)1),    // Todo User Id로 변경
                     post.getCreatedDate(),
                     post.getModifiedDate(),
-                    likeServiceImpl.countLikes(postId));
+                    likeService.countLikes(postId));
 
             // Todo postId 가 다른 여러 개의 Entity가 입력되었을 때, like Count 가 정상 작동하는지 확인.
 
@@ -197,10 +201,10 @@ public class PostServiceImpl {
                     post,
                     tagRepository.findTagsByPostPostId(postId),
                     userService.findNicknameByPostId(postId),
-                    likeServiceImpl.isLiked(postId,(long)1),    // Todo User Id 로 변경
+                    likeService.isLiked(postId,(long)1),    // Todo User Id 로 변경
                     post.getCreatedDate(),
                     post.getModifiedDate(),
-                    likeServiceImpl.countLikes(postId));
+                    likeService.countLikes(postId));
 
             postPreviews.add(postPreview);
         }
