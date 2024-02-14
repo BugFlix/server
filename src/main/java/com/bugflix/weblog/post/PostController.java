@@ -1,19 +1,20 @@
-package com.bugflix.weblog.post.controller;
+package com.bugflix.weblog.post;
 
-import com.bugflix.weblog.post.dto.PostPreviewResponse;
-import com.bugflix.weblog.post.service.PostServiceImpl;
+import com.bugflix.weblog.post.dto.PostPreview;
 import com.bugflix.weblog.post.dto.PostResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.bugflix.weblog.post.dto.PostRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/v1/post")
 @Slf4j
 public class PostController {
     private final PostServiceImpl postServiceImpl;
@@ -35,7 +36,7 @@ public class PostController {
      * - 1. extension 에서 저장 요청
      * - 2. weblog page 에서 저장 요청
      */
-    @PostMapping("/v1/post")
+    @PostMapping
     public ResponseEntity<Void> savePost(@RequestBody PostRequest postRequest) {
         postServiceImpl.savePost(postRequest);
         return ResponseEntity.ok().build();
@@ -58,7 +59,7 @@ public class PostController {
      * - 1. extension 에서 수정 요청
      * - 2. weblog page 에서 수정 요청
      */
-    @PutMapping("/v1/post")
+    @PutMapping
     public ResponseEntity<Void> updatePost(@RequestBody PostRequest postRequest, @RequestParam(name = "postId") Long postId) throws Exception {
         postServiceImpl.updatePost(postRequest, postId);
         return ResponseEntity.ok().build();
@@ -81,7 +82,7 @@ public class PostController {
      * - 1. post 목록에서 post Click
      * - 2. post_id 로 post 검색
      */
-    @GetMapping("/v1/post/{postId}")
+    @GetMapping("/{postId}")
     public ResponseEntity<PostResponse> getPost(@PathVariable Long postId) throws Exception {
 
         return ResponseEntity.ok(postServiceImpl.getPost(postId));
@@ -103,7 +104,7 @@ public class PostController {
      * Scenario :
      * - 1. extension 에서 post 보기 요청
      */
-    @GetMapping("/v1/post")
+    @GetMapping
     public ResponseEntity<List<PostResponse>> getPost(@RequestParam(name = "url") String url) {
 
         return ResponseEntity.ok(postServiceImpl.getPosts(url));
@@ -114,7 +115,7 @@ public class PostController {
      * Parameter :
      * - String url: web page 주소
      * Return :
-     * - ResponseEntity<ArrayList<PostPreviewResponse>> :
+     * - ResponseEntity<ArrayList<PostPreview>> :
      * - Success : 200 ok && ArrayList<Post>
      * - Failed : error
      * <p>
@@ -124,8 +125,8 @@ public class PostController {
      * Scenario :
      * - 1. extension 에서 post 목록 요청
      */
-    @GetMapping("/v1/post/preview")
-    public ResponseEntity<List<PostPreviewResponse>> getPostPreview(@RequestParam(name = "url") String url) {
+    @GetMapping("/preview")
+    public ResponseEntity<List<PostPreview>> getPostPreview(@RequestParam(name = "url") String url) {
 
         return ResponseEntity.ok(postServiceImpl.getPostPreview(url));
     }
@@ -135,13 +136,13 @@ public class PostController {
      * Parameter :
      * - String url
      * Return :
-     * - ResponseEntity<ArrayList<PostPreviewResponse>>
+     * - ResponseEntity<ArrayList<PostPreview>>
      * <p>
      * Explanation :
      * - 특정 web page 에 있는 본인이 작성한 모든 post 의 preview 반환
      */
-    @GetMapping("/v1/post/mine")
-    public ResponseEntity<List<PostPreviewResponse>> getMyPostPreview(@RequestParam(name = "url") String url) {
+    @GetMapping("/mine")
+    public ResponseEntity<List<PostPreview>> getMyPostPreview(@RequestParam(name = "url") String url) {
 
         return ResponseEntity.ok(postServiceImpl.getMyPostPreview(url));
     }
@@ -156,7 +157,7 @@ public class PostController {
      * Explanation :
      * - postId 로 Post 삭제
      */
-    @DeleteMapping("/v1/post/{postId}")
+    @DeleteMapping("/{postId}")
     public ResponseEntity<Void> deletePost(@PathVariable Long postId) {
 
         postServiceImpl.deletePost(postId);
