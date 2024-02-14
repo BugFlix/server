@@ -1,9 +1,7 @@
 package com.bugflix.weblog.comment;
 
-import com.bugflix.weblog.common.BaseTimeEntity;
 import com.bugflix.weblog.post.Post;
 import com.bugflix.weblog.user.User;
-import com.fasterxml.jackson.databind.ser.Serializers;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -15,7 +13,8 @@ import java.util.List;
 @Entity(name = "comment_tb")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Comment extends BaseTimeEntity {
+public class Comment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")
