@@ -7,7 +7,6 @@ import com.bugflix.weblog.security.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -32,18 +31,25 @@ public class SecurityConfiguration {
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     private static final String[] PERMIT_TO_USER = {
-            "/api/v1/auths/test",
+            "/api/v1/auth/test"
     };
 
     private static final String[] SWAGGER_URL_ARRAY = {
             "/v3/api-docs/**",
             "/swagger-ui/**",
+            /*
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/webjars/**",
+             */
     };
 
     private static final String[] PERMIT_TO_ALL = {
             "/api/v1/users",
-            "/api/v1/auths/login",
-            "/api/v1/auths/reissue"
+            "/api/v1/auth/login",
+            "/api/v1/auth/reissue"
     };
 
     @Bean
@@ -64,20 +70,6 @@ public class SecurityConfiguration {
                 // 조건별로 요청 허용/제한 설정
                 .and()
                 .authorizeRequests()
-
-                .requestMatchers(HttpMethod.POST, "/api/v1/posts").hasRole("USER")
-                .requestMatchers(HttpMethod.PUT, "/api/v1/posts").hasRole("USER")
-                .requestMatchers(HttpMethod.DELETE, "/api/v1/posts/**").hasRole("USER")
-
-                .requestMatchers(HttpMethod.GET, "/api/v1/posts/mine").hasRole("USER")
-
-                // 조회
-                .requestMatchers(HttpMethod.GET, "/api/v1/posts").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/v1/posts/{postId}").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/v1/posts/preview").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/v1/posts/**").permitAll()
-
-                .requestMatchers(HttpMethod.PATCH, "/api/v1/likes/**").hasRole("USER")
 
                 .requestMatchers(PERMIT_TO_USER).hasRole("USER")
                 .requestMatchers(PERMIT_TO_ALL).permitAll()
