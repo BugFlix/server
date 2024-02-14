@@ -17,30 +17,15 @@ public class PostPreview {
     private String nickname;
     private List<Tag> tags;
     private Long likeCount;
-    private boolean isLiked;
+    private boolean isLike;
     private String imageUrl;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
 
-    public PostPreview(
-            Post post,
-            List<Tag> tags,
-            String nickname,
-            boolean isLiked,
-            LocalDateTime createdDate,
-            LocalDateTime modifiedDate,
-            Long likeCount)
-    {
+    public PostPreview(Post post){
         this.postId = post.getPostId();
         this.title = post.getTitle();
         this.imageUrl = post.getImageUrl();
-
-        this.tags = tags;
-        this.nickname = nickname;
-        this.isLiked = isLiked;
-        this.createdDate = createdDate;
-        this.modifiedDate = modifiedDate;
-        this.likeCount = likeCount;
     }
 }
