@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import post.dto.PostRequest;
-import post.dto.PostResponse;
 import user.User;
 
 import java.util.Date;
@@ -30,9 +28,5 @@ public class Post {
     @JoinColumn(name="user_id", nullable = false)
     private User user;
 
-    public Post(PostRequest postRequest){
-        title = postRequest.getTitle();;
-        content = postRequest.getContent();
-        like = postRequest.getLike();
-    }
+
 }
