@@ -19,7 +19,7 @@ public class Profile {
     @EmbeddedId
     private ProfileKey id;
 
-    private String profileImageUrl;
+    private String profileImageLink;
     private String phoneNumber;
     private LocalDate birthDate;
 
