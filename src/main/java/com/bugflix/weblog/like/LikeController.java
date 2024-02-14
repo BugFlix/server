@@ -13,11 +13,11 @@ import java.nio.file.Path;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/like")
+@RequestMapping("/api")
 @Slf4j
 public class LikeController {
     private final LikeServiceImpl likeServiceImpl;
-    @GetMapping("/{postId}")
+    @GetMapping("/like/{postId}")
     public ResponseEntity<LikeStatus> changeLikeStatus(@PathVariable(name = "postId")Long postId){
         return ResponseEntity.ok(likeServiceImpl.changeLikeStatus(postId));
     }
