@@ -5,12 +5,11 @@ import com.bugflix.weblog.post.Post;
 import com.bugflix.weblog.tag.dto.TagRequest;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity(name = "tag_tb")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Tag extends BaseTimeEntity {
 
     @Id
