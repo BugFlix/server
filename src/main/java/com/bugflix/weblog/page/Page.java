@@ -8,11 +8,11 @@ import com.bugflix.weblog.post.Post;
 
 import java.util.List;
 
-@Entity(name = "page_tb")
+@Entity
 @NoArgsConstructor
 public class Page {
 
-    @Id @Column(name = "page_id") @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Getter

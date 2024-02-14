@@ -1,14 +1,14 @@
 package com.bugflix.weblog.tag;
 
-import com.bugflix.weblog.postandtag.PostAndTag;
 import com.bugflix.weblog.tag.dto.TagRequest;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-@Entity(name = "tag_tb")
+@Entity
 @NoArgsConstructor
 public class Tag {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,9 +16,6 @@ public class Tag {
 
     @Getter
     private String tag;
-
-    @OneToMany(mappedBy = "tag",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<PostAndTag> postAndTags;
 
     public Tag(TagRequest tagRequest){
         tag = tagRequest.getTag();

@@ -1,7 +1,6 @@
 package com.bugflix.weblog.user;
 
 import jakarta.persistence.*;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import com.bugflix.weblog.post.Post;
 
@@ -9,7 +8,6 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
-@Getter
 public class User {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
