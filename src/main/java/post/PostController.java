@@ -2,7 +2,6 @@ package post;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -64,7 +63,7 @@ public class PostController {
     @GetMapping("/post")
     public ResponseEntity<PostResponse> getPost(@RequestParam Long postId){
 
-        return new ResponseEntity<>(postService.getPost(postId), HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 
     // Todo : RequestHeader 내용 수정 : @RequestHeader({Header Field Name})
@@ -87,7 +86,7 @@ public class PostController {
     @GetMapping("/post")
     public ResponseEntity<ArrayList<PostResponse>> getPost(@RequestHeader String url){
 
-        return ResponseEntity.ok(postService.getPost(url));
+        return ResponseEntity.ok().build();
     }
 
 
