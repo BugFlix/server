@@ -31,25 +31,23 @@ public class SecurityConfiguration {
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     private static final String[] PERMIT_TO_USER = {
-            "/api/auth/test"
+            "/api/users/test",
+            "/api/auth/reissue"
     };
 
     private static final String[] SWAGGER_URL_ARRAY = {
             "/v3/api-docs/**",
             "/swagger-ui/**",
-            /*
-            "/swagger-resources",
-            "/swagger-resources/**",
-            "/configuration/ui",
-            "/configuration/security",
-            "/webjars/**",
-             */
+//            "/swagger-resources",
+//            "/swagger-resources/**",
+//            "/configuration/ui",
+//            "/configuration/security",
+//            "/webjars/**",
     };
 
     private static final String[] PERMIT_TO_ALL = {
             "/api/users",
             "/api/auth/login",
-            "/api/auth/reissue"
     };
 
     @Bean
@@ -74,9 +72,7 @@ public class SecurityConfiguration {
                 .requestMatchers(PERMIT_TO_USER).hasRole("USER")
                 .requestMatchers(PERMIT_TO_ALL).permitAll()
                 .requestMatchers(SWAGGER_URL_ARRAY).permitAll()
-                // FilterChain.doFilter(...) AccessDeniedException이 발생하던 이유는
-                // denyAll 때문이 아닌 @PostMapping(value)가 아닌 @PostMapping(name)으로 잘못작성했기 때문이였음.
-                .anyRequest().denyAll()
+                .anyRequest().authenticated() // .anyRequest().denyAll() -> FilterChain.doFilter(...) AccessDeniedException
 
                 // JWT 인증 필터 적용
                 .and()
