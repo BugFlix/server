@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface PostAndTagRepository extends JpaRepository<PostAndTag,Long> {
     List<PostAndTag> findPostAndTagByPostPageUrl(String url);
-
 }

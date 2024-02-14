@@ -3,6 +3,7 @@ package com.bugflix.weblog.post.dto;
 import com.bugflix.weblog.profile.Profile;
 import com.bugflix.weblog.tag.Tag;
 import com.bugflix.weblog.user.User;
+import com.mysql.cj.log.ProfilerEvent;
 import lombok.Data;
 import com.bugflix.weblog.post.Post;
 import lombok.NoArgsConstructor;
@@ -31,7 +32,7 @@ public class PostResponse {
         this(post);
         this.tags = new ArrayList<>();
         for (Tag tag:tags){
-            this.tags.add(tag.getTagContent());
+            this.tags.add(tag.getTag());
         }
 
     }
