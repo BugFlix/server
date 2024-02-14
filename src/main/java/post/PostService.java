@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class PostServiceImpl {
+public class PostService {
     private final PostRepository postRepository;
 
     public Boolean savePost(PostRequest postRequest){
