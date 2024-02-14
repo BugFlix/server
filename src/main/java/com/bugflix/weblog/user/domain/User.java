@@ -27,7 +27,8 @@ public class User extends BaseTimeEntity {
 
     private String nickname;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_id")
+    @OneToOne
     private Profile profile;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -45,10 +46,6 @@ public class User extends BaseTimeEntity {
             authority.assignUser(this);
             return authority;
         }).collect(Collectors.toList());
-    }
-
-    public void assignProfile(Profile profile) {
-        this.profile = profile;
     }
 
 }
