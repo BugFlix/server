@@ -1,7 +1,6 @@
-package com.bugflix.weblog.like.controller;
+package com.bugflix.weblog.like;
 
-import com.bugflix.weblog.like.dto.LikeStatusResponse;
-import com.bugflix.weblog.like.service.LikeServiceImpl;
+import com.bugflix.weblog.like.dto.LikeStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -10,15 +9,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.nio.file.Path;
+
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/like")
 @Slf4j
 public class LikeController {
     private final LikeServiceImpl likeServiceImpl;
 
-    @GetMapping("/v1/like/{postId}")
-    public ResponseEntity<LikeStatusResponse> changeLikeStatus(@PathVariable(name = "postId") Long postId) {
+    @GetMapping("/{postId}")
+    public ResponseEntity<LikeStatus> changeLikeStatus(@PathVariable(name = "postId") Long postId) {
         return ResponseEntity.ok(likeServiceImpl.changeLikeStatus(postId));
     }
 }
