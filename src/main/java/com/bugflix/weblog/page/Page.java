@@ -2,7 +2,6 @@ package com.bugflix.weblog.page;
 
 import com.bugflix.weblog.post.dto.PostRequest;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import com.bugflix.weblog.post.Post;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "page_tb")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Page {
 
     @Id
