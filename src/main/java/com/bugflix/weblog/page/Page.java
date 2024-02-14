@@ -6,23 +6,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import com.bugflix.weblog.post.Post;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "page_tb")
 @NoArgsConstructor
 public class Page {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "page_id")
+    @Id @Column(name = "page_id") @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Getter
     private String url;
 
-    @OneToMany(mappedBy = "page")
-    private List<Post> posts = new ArrayList<>();
+    @OneToMany(mappedBy = "page",cascade = CascadeType.ALL, orphanRemoval = true,fetch=FetchType.LAZY)
+    private List<Post> posts;
 
     public Page(PostRequest postRequest){
         this.url = postRequest.getUrl();
