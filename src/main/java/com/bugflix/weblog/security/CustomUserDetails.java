@@ -1,6 +1,6 @@
-package com.bugflix.weblog.security.domain;
+package com.bugflix.weblog.security;
 
-import com.bugflix.weblog.user.domain.User;
+import com.bugflix.weblog.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,15 +14,13 @@ public class CustomUserDetails implements UserDetails {
 
     private final User user;
 
-    public User getUser() {
-        return user;
-    }
+    public User getUser() { return user; }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return user.getRoles().stream().map(authority ->
                 new SimpleGrantedAuthority(authority.getName())
-        ).collect(Collectors.toList());
+                ).collect(Collectors.toList());
     }
 
     @Override
@@ -32,18 +30,14 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getEmail();
+        return user.getLoginId();
     }
 
     @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+    public boolean isAccountNonExpired() { return true; }
 
     @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+    public boolean isAccountNonLocked() { return true; }
 
     @Override
     public boolean isCredentialsNonExpired() {
