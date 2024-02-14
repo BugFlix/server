@@ -35,6 +35,7 @@ public class PostController {
      *    - 1. extension 에서 저장 요청
      *    - 2. weblog page 에서 저장 요청
      * */
+
     @PostMapping("/post")
     public ResponseEntity<Void> savePost(@RequestBody PostRequest postRequest){
         postServiceImpl.savePost(postRequest);
@@ -64,6 +65,7 @@ public class PostController {
         return ResponseEntity.ok().build();
     }
 
+
     /**
      *  Name : getPost
      *  Parameter :
@@ -81,11 +83,13 @@ public class PostController {
      *   - 1. post 목록에서 post Click
      *   - 2. post_id 로 post 검색
      * */
+
     @GetMapping("/post/{postId}")
     public ResponseEntity<PostResponse> getPost(@PathVariable Long postId) throws Exception{
 
         return ResponseEntity.ok(postServiceImpl.getPost(postId));
     }
+
 
     /**
      *  Name : getPost
@@ -146,20 +150,9 @@ public class PostController {
         return ResponseEntity.ok(postServiceImpl.getMyPostPreview(url));
     }
 
-    /**
-     * Name : deletePost
-     * Parameter :
-     *  - Long postId
-     * Return :
-     *  - ResponseEntity<Void>
-     *
-     * Explanation :
-     *  - postId 로 Post 삭제
-     * */
     @DeleteMapping("/post/{postId}")
     public ResponseEntity<Void> deletePost(@PathVariable Long postId) {
-
-        postServiceImpl.deletePost(postId);
+        // Todo 2. Post Delete Logic 구성
         return ResponseEntity.ok().build();
     }
 
