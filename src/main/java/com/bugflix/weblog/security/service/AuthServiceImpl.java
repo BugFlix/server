@@ -41,9 +41,6 @@ public class AuthServiceImpl {
         return TokenResponse.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
-                .userId(user.getUserId())
-                .nickname(user.getNickname())
-                .email(user.getEmail())
                 .build();
     }
 
