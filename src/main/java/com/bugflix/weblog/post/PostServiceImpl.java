@@ -73,7 +73,6 @@ public class PostServiceImpl {
         }
 
     }
-
     /**
      *  Name : updatePost
      *  Parameter :
@@ -177,7 +176,6 @@ public class PostServiceImpl {
         }
         return postPreviews;
     }
-
     /**
      * Name : getMyPostPreview
      * Parameter :
@@ -209,21 +207,7 @@ public class PostServiceImpl {
         return postPreviews;
     }
 
-    /**
-     * Name : deletePost
-     * Parameter :
-     *  - Long postId
-     * Return :
-     *  - void
-     *
-     * Explanation :
-     *  - PostId 를 매개변수로 받아, Post Entity 검색
-     *  - 존재하면 delete
-     *  - 존재하지 않으면 IllegalArgumentException 예외 처리 ( Invalid postId )
-     * */
-    public void deletePost(Long postId) throws IllegalArgumentException {
-        // Todo Global Exception Handler 생성
-        Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("Invalid Post Id"));
-        postRepository.delete(post);
+    public void deletePost(Long postId){
+        postRepository.deleteByPostId(postId);
     }
 }

@@ -34,7 +34,7 @@ public class Post extends BaseTimeEntity {
     @JoinColumn(name="page_id",nullable = false)
     private Page page;
 
-    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post")
     private List<Tag> tags = new ArrayList<>();
 
 
