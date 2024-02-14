@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import com.bugflix.weblog.post.dto.PostRequest;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -105,7 +104,7 @@ public class PostController {
      *   - 1. extension 에서 post 보기 요청
      * */
     @GetMapping
-    public ResponseEntity<List<PostResponse>> getPost(@RequestParam(name="url") String url) {
+    public ResponseEntity<ArrayList<PostResponse>> getPost(@RequestParam(name="url") String url) {
 
         return ResponseEntity.ok(postServiceImpl.getPosts(url));
     }
@@ -126,7 +125,7 @@ public class PostController {
      *   - 1. extension 에서 post 목록 요청
      * */
     @GetMapping("/preview")
-    public ResponseEntity<List<PostPreview>> getPostPreview(@RequestParam(name = "url")String url){
+    public ResponseEntity<ArrayList<PostPreview>> getPostPreview(@RequestParam(name = "url")String url){
 
         return ResponseEntity.ok(postServiceImpl.getPostPreview(url));
     }
@@ -142,7 +141,7 @@ public class PostController {
      *  - 특정 web page 에 있는 본인이 작성한 모든 post 의 preview 반환
      * */
     @GetMapping("/mine")
-    public ResponseEntity<List<PostPreview>> getMyPostPreview(@RequestParam(name = "url")String url){
+    public ResponseEntity<ArrayList<PostPreview>> getMyPostPreview(@RequestParam(name = "url")String url){
 
         return ResponseEntity.ok(postServiceImpl.getMyPostPreview(url));
     }
