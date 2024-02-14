@@ -14,8 +14,7 @@ import java.util.List;
 @Getter
 public class Comment {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue
     @Column(name = "comment_id")
     private Long id;
 
