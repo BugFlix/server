@@ -286,8 +286,15 @@ public class PostServiceImpl {
      * - 존재하면 delete
      * - 존재하지 않으면 IllegalArgumentException 예외 처리 ( Invalid postId )
      */
-    public void deletePost(Long postId) throws IllegalArgumentException {
+    public void deletePost(Long postId,UserDetails userDetails) throws IllegalArgumentException {
         // Todo Global Exception Handler 생성
+        // 삭제할 Post가 본인 것이 맞는지 확인
+        // 1. User 정보 받아오기
+        Long userId = ((CustomUserDetails) userDetails).getUser().getUserId();
+        // 2. Post Repository 에서 UserId로 Post 검색
+        List<Post> posts = postRepository.findByUserUserId(userId);
+        // 3.
+
         Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("Invalid Post Id"));
         postRepository.delete(post);
     }
