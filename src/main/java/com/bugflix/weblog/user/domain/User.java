@@ -2,6 +2,7 @@ package com.bugflix.weblog.user.domain;
 
 import com.bugflix.weblog.comment.domain.Comment;
 import com.bugflix.weblog.common.BaseTimeEntity;
+import com.bugflix.weblog.follow.domain.Follow;
 import com.bugflix.weblog.post.domain.Post;
 import com.bugflix.weblog.profile.domain.Profile;
 import jakarta.persistence.*;
@@ -44,6 +45,9 @@ public class User extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Follow> follows = new ArrayList<>();
 
     @Builder
     public User(String email, String password, String nickname) {
